@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李子清端口</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        /* 顶部栏样式 */
+        .top-bar {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .timer {
+            color: #333;
+            font-size: 14px;
+        }
+        /* 提示框样式 */
+        .toast {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin: 10px 20px;
+        }
+        /* 主内容区样式（渐变背景） */
+        .main-section {
+            background: linear-gradient(to right, #ff7eb3, #46b1e6);
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+        .title {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ffd700;
+            border-radius: 20px;
+            padding: 8px 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #ffd700;
+            margin-bottom: 10px;
+        }
+        .slogan {
+            margin-bottom: 20px;
+        }
+        .wish {
+            color: #ffd700;
+        }
+        /* 验证时间区样式 */
+        .time-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .time-title {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .time-display {
+            font-size: 36px;
+            color: #ffd700;
+        }
+        /* 频道公告区样式 */
+        .channel-section {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        .left-notice, .right-notice {
+            flex: 1;
+        }
+        .notice-item {
+            margin-bottom: 8px;
+            color: #666;
+        }
+        .notice-item.green {
+            color: #00cc66;
+        }
+        .notice-item.yellow {
+            color: #ffd700;
+        }
+        /* 可收起公告样式 */
+        .toggle-notice {
+            cursor: pointer;
+            color: #00cc66;
+            margin-bottom: 8px;
+        }
+        .notice-content {
+            display: block; /* 默认显示 */
+        }
+        .notice-content.hidden {
+            display: none; /* 收起时隐藏 */
+        }
+        /* 底部标语区样式 */
+        .bottom-slogan {
+            padding: 20px;
+            text-align: center;
+        }
+        .slogan-item {
+            margin-bottom: 8px;
+            color: #00cc66;
+            font-size: 18px;
+        }
+        .copyright {
+            text-align: center;
+            padding: 10px;
+            color: #00cc66;
+        }
+        /* 音乐控制栏样式 */
+        .music-bar {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .music-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .music-text {
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .music-progress {
+            width: 100px;
+            height: 4px;
+            background-color: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .music-progress-bar {
+            width: 0%; /* 初始进度为0 */
+            height: 100%;
+            background-color: #46b1e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="timer">您已使用李子清端口 <span id="second">0</span> 秒</div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast">李子清端口验证成功，祝您稳定奔放</div>
+
+    <!-- 主内容区 -->
+    <div class="main-section">
+        <div class="title">李子清端口</div>
+        < img src="https://img10.360buyimg.com/ddimg/jfs/t1/337350/1/17910/63642/68e50c77F0386a4a7/71cc03da2cc4701f.jpg" alt="头像" class="avatar">
+        <p class="slogan">人生如戏 全靠演技</p >
+        <p class="wish">臭奶龙祝你稳定奔放</p >
+    </div>
+
+    <!-- 验证时间区 -->
+    <div class="time-section">
+        <div class="time-title">验证时间：</div>
+        <div class="time-display" id="time">下午8:36:12</div>
+    </div>
+
+    <!-- 频道公告区 -->
+    <div class="channel-section">
+        <div class="left-notice">
+            <p class="notice-item green">频道：@xzlpa</p >
+            <p class="notice-item yellow">已开启李子清端口</p >
+            <p class="notice-item yellow">祝你您稳定奔放</p >
+        </div>
+        <div class="right-notice">
+            <!-- 可收起公告 -->
+            <div class="toggle-notice" id="noticeToggle">公告[点击可收起]</div>
+            <div class="notice-content" id="noticeContent">
+                <p class="notice-item">频道：@xzlpa</p >
+                <p class="notice-item">欢迎使用李子清端口</p >
+                <p class="notice-item">宝宝记得演戏稳定奔</p >
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部标语区 -->
+    <div class="bottom-slogan">
+        <p class="slogan-item">李子清端口稳定认准</p >
+        <p class="slogan-item">经典上分</p >
+        <p class="slogan-item">地铁乱杀</p >
+        <p class="slogan-item">臭奶龙祝你稳定奔放</p >
+    </div>
+
+    <div class="copyright">版权所有：李子清</div>
+
+    <!-- 音乐控制栏 -->
+    <div class="music-bar">
+        < img src="https://img10.360buyimg.com/ddimg/jfs/t1/328553/15/26973/74964/68e50d02F1f2779ce/7089f44dc1cd4abe.jpg" alt="音乐图标" class="music-avatar" id="musicAvatar">
+        <div class="music-text" id="musicText">播放中: 李子清音乐🎶</div>
+        <div class="music-progress">
+            <div class="music-progress-bar" id="musicProgressBar"></div>
+        </div>
+    </div>
+
+    <!-- 音频标签（隐藏，通过自定义控件控制） -->
+    <audio id="music" loop>
+        <!-- 替换为“李子清音乐”的实际音频文件URL -->
+        <source src="wo-shi-nai-long.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+
+    <script>
+        // 计时功能
+        let second = 0;
+        setInterval(() => {
+            second++;
+            document.getElementById('second').innerText = second;
+        }, 1000);
+
+        // 实时时间功能
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours() % 12 || 12;
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const period = now.getHours() >= 12 ? '下午' : '上午';
+            document.getElementById('time').innerText = `${period}${hours}:${minutes}:${seconds}`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // 公告收起/展开功能
+        const noticeToggle = document.getElementById('noticeToggle');
+        const noticeContent = document.getElementById('noticeContent');
+        noticeToggle.addEventListener('click', () => {
+            noticeContent.classList.toggle('hidden');
+            noticeToggle.innerText = noticeContent.classList.contains('hidden') 
+                ? '公告[点击可展开]' 
+                : '公告[点击可收起]';
+        });
+
+        // 音乐播放功能
+        const music = document.getElementById('music');
+        const musicAvatar = document.getElementById('musicAvatar');
+        const musicText = document.getElementById('musicText');
+        const musicProgressBar = document.getElementById('musicProgressBar');
+        let isPlaying = false;
+
+        // 点击音乐图标控制播放/暂停
+        musicAvatar.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicText.innerText = '已暂停: 李子清音乐🎶';
+            } else {
+                music.play();
+                musicText.innerText = '播放中: 李子清音乐🎶';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 实时更新音乐进度条
+        music.addEventListener('timeupdate', () => {
+            const progress = (music.currentTime / music.duration) * 100;
+            musicProgressBar.style.width = `${progress}%`;
+        });
+
+        // 音乐结束后重置状态
+        music.addEventListener('ended', () => {
+            isPlaying = false;
+            musicText.innerText = '已结束: 李子清音乐🎶';
+        });
+    </script>
+</body>
+</html>
